@@ -20,6 +20,9 @@ const DRAW = 3;
 const LOSS = 0;
 const RESULT_SCORE = { X: LOSS, Y: DRAW, Z: WIN };
 
+const LOSS_CODE = "X";
+const WIN_CODE = "Z";
+
 const input = await Deno.readTextFile("./2.input");
 const strategy = input
   .trimEnd()
@@ -39,23 +42,23 @@ const winEngine = (oIn: LeftIn, pIn: RightIn): number => {
   return LOSS + score;
 };
 
-const targetEngine = (opponentIn: LeftIn, desiredIn: RightIn): number => {
-  const oShape = SHAPES[opponentIn];
+const targetEngine = (opponent: LeftIn, desired: RightIn): number => {
+  const oShape = SHAPES[opponent];
   const oIndex = LOSS_ORDER.indexOf(oShape);
 
   let pIndex = oIndex;
 
-  if (desiredIn === "X") {
+  if (desired === LOSS_CODE) {
     pIndex = oIndex - 1;
     if (pIndex < 0) pIndex += NUM_SHAPES;
-  } else if (desiredIn === "Z") {
+  } else if (desired === WIN_CODE) {
     pIndex = oIndex + 1;
     if (pIndex === NUM_SHAPES) pIndex -= NUM_SHAPES;
   }
 
   const pShape = LOSS_ORDER[pIndex];
   const pScore = SHAPE_SCORE[pShape];
-  return RESULT_SCORE[desiredIn] + pScore;
+  return RESULT_SCORE[desired] + pScore;
 };
 
 let total1 = 0;
