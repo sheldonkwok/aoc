@@ -1,3 +1,5 @@
+const input = (await Deno.readTextFile("./3.input")).trimEnd().split("\n");
+
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz".split("");
 const PRIORITIES = new Map<string, number>();
 for (const [i, letter] of ALPHABET.entries()) {
@@ -12,8 +14,6 @@ const getPrio = (item?: string) => {
   if (!prio) throw new Error(`Missing priority ${item}`);
   return prio;
 };
-
-const input = (await Deno.readTextFile("./3.input")).trimEnd().split("\n");
 
 const part1 = (rugsacks: string[]) => {
   let total = 0;
