@@ -12,7 +12,7 @@ const E = 27;
 HEIGHT_MAP.set("S", S);
 HEIGHT_MAP.set("E", E);
 
-const grid = (await Deno.readTextFile("./12.test"))
+const grid = (await Deno.readTextFile("./12.input"))
   .trimEnd()
   .split("\n")
   .map((l) =>
