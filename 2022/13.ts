@@ -1,8 +1,8 @@
-import stdin from "./stdin.ts";
+import utils from "./utils.ts";
 
 type RArr = number | number[] | RArr[];
 
-const input = stdin
+const input = utils.rawInput
   .split("\n\n")
   .map((i) => i.split("\n").map(eval) as [RArr, RArr]);
 
