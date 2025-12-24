@@ -1,13 +1,12 @@
-import { basename } from 'node:path';
+import { basename } from "node:path";
 
 const EXAMPLE_SEPARATOR = "----";
 
 const IS_REAL = Bun.argv.includes("-r");
-const entryNum = Number(basename(Bun.main).split('.')[0]);
+const entryNum = Number(basename(Bun.main).split(".")[0]);
 
 export async function getInput(num: number = entryNum): Promise<string> {
-
-  if (isNaN(num)) throw new Error(`Invalid input number ${num}`)
+  if (isNaN(num)) throw new Error(`Invalid input number ${num}`);
 
   const file = await Bun.file(`${num}.input`);
   const text = await file.text();

@@ -1,9 +1,11 @@
 import * as utils from "./utils.ts";
 
 const input = await utils.getInput();
-const [rangeStr, ingredientsStr] = input.split("\n\n").map(l => l.split('\n'));
+const [rangeStr, ingredientsStr] = input
+  .split("\n\n")
+  .map((l) => l.split("\n"));
 
-const ranges = rangeStr.map(l => l.split('-').map(Number));
+const ranges = rangeStr.map((l) => l.split("-").map(Number));
 const ingredients = ingredientsStr.map(Number);
 
 function isFresh(num: number): boolean {
@@ -14,13 +16,13 @@ function isFresh(num: number): boolean {
   return false;
 }
 
-function part1(){
+function part1() {
   const total = ingredients.reduce((agg, curr) => {
     if (isFresh(curr)) return agg + 1;
     return agg;
   }, 0);
 
-  console.log(total)
+  console.log(total);
 }
 
 function part2() {
@@ -37,10 +39,8 @@ function part2() {
 
       const [compMin, compMax] = compRange;
 
-
       if (min >= compMin && max >= compMax) continue;
 
-      
       if (min < compMin && max <= compMax) {
         compRange[0] = min;
         modified = true;
@@ -68,26 +68,23 @@ function part2() {
       const [nextMin, nextMax] = next;
 
       if (nextMin >= currMin && nextMin <= currMax && nextMax >= currMax) {
-        newRanges.splice(nextIndex, 1)
+        newRanges.splice(nextIndex, 1);
         curr[1] = nextMax;
       }
 
       if (currMin <= nextMin && currMax >= nextMax) {
-        newRanges.splice(nextIndex, 1)
+        newRanges.splice(nextIndex, 1);
       }
 
       i++;
     }
   }
 
-
   const total = newRanges.reduce((agg, [min, max]) => {
     return agg + max - min + 1;
   }, 0);
 
   console.log(total);
-
 }
 
 part2();
-

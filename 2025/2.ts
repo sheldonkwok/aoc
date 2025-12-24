@@ -1,8 +1,7 @@
 import * as utils from "./utils.ts";
 
 const input = await utils.getInput(2);
-const lines = input.split(",").map(l => l.split('-').map(Number)); //.slice(1, 2);
-
+const lines = input.split(",").map((l) => l.split("-").map(Number)); //.slice(1, 2);
 
 function isValid1(input: number): boolean {
   const str = input.toString();
@@ -26,8 +25,8 @@ function isValid2(input: number): boolean {
     let exited = false;
     let matching = false;
 
-    for (let j = i + 1; j < len; j += i +1) {
-      const toCheck = str.substring(j, j+i + 1);
+    for (let j = i + 1; j < len; j += i + 1) {
+      const toCheck = str.substring(j, j + i + 1);
 
       if (scan !== toCheck) {
         exited = true;
@@ -37,21 +36,19 @@ function isValid2(input: number): boolean {
       }
     }
 
-    if (matching && !exited) return false
+    if (matching && !exited) return false;
   }
 
   return true;
 }
-
-
 
 let total1 = 0;
 let total2 = 0;
 
 for (const [start, end] of lines) {
   for (let i = start; i <= end; i++) {
-    if(!isValid1(i)) total1 += i;
-    if(!isValid2(i)) total2 += i;
+    if (!isValid1(i)) total1 += i;
+    if (!isValid2(i)) total2 += i;
   }
 }
 
